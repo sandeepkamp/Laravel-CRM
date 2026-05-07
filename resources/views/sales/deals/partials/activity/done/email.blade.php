@@ -1,0 +1,43 @@
+<li class="timeline-item timeline-item-transparent">
+    <span class="timeline-point timeline-point-success"></span>
+        <div class="timeline-event">
+            <div class="timeline-header mb-2 pb-1">
+                <h6 class="mb-0 text-success">
+                    <i class="tf-icons mdi mdi-email-outline"></i>
+                    <span class="me-3">{{ $done->title ? $done->title : 'Email' }}</span>
+                    <div class="float-end">
+                        <form method="POST" action="{{ route('deal.activity.delete', [$deal->id, $done->id]) }}">
+                            @csrf
+                            @method('DELETE')
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="mdi mdi-dots-vertical"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ route('deal.activity.edit', [$deal->id, $done->id]) }}">
+                                        <i class="mdi mdi-pencil-outline me-1"></i>Edit
+                                    </a>
+                                    <button class="dropdown-item" type="submit">
+                                        <i class="mdi mdi-trash-can-outline me-1"></i>Delete
+                                    </button>
+                                    <!--<a class="dropdown-item" href="{{ route('lead.activity.todo', [$deal->id, $done->id]) }}">-->
+                                    <!--    <i class="tf-icons mdi mdi-checkbox-marked-circle-plus-outline"></i>Mark as todo-->
+                                    <!--</a>-->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </h6>
+            <small class="text-muted" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{ date('M j, Y h:i a', strtotime($done->time_from)) }}">{{ date('M j, Y', strtotime($done->time_from)) }}</small>
+        </div>
+        <p class="mb-2">{!! $done->description !!}</p>
+        <div class="d-flex flex-wrap align-items-center">
+            <div class="avatar avatar-xs me-2">
+               <img src="{{ url('assets/img/avatars/1.png') }}" alt="Avatar" class="rounded-circle">
+            </div>
+            <a href="mailto:{{ $deal->email }}" title="Click to email">
+               <h6 class="mb-0 text-body">{{ $deal->full_name }}</h6>
+            </a>
+        </div>
+    </div>
+</li>
